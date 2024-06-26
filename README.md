@@ -15,7 +15,7 @@ Intructions can be found in the [MoveIt 1 - Noetic Documentation](https://moveit
 
 ## 3. Download and Run UR5e Model
 
-Follow [steps to install](https://wiki.ros.org/universal_robots) the Universal Robots Package. Make sure that you enter "noetic" in place of the "$ROS_DISTRO" argument for each command that contains it. DO NOT use `cd/path/to/catkin_ws/src`. Here we already made a workspace for moveit, so we will install the package in `~/ws_moveit/src`. The same goes for the `rosdep` commands: use `~/ws_moveit`.
+Follow [steps to install](https://wiki.ros.org/universal_robots) the Universal Robots Package. Make sure that you enter `noetic` in place of the `$ROS_DISTRO` argument for each command that contains it. DO NOT use `cd/path/to/catkin_ws/src`. Here we have already made a workspace for moveit, so we will install the package in `~/ws_moveit/src`, and the same goes for the `rosdep` commands: use `~/ws_moveit`.
 
 We can now see a folder in `~/ws_moveit/src` labeled "universal_robot". From here, we can navigate to the subfolder "ur5e_moveit_config". In the "launch" folder there are multiple launch files to choose from. We can launch the demo file by entering the terminal and entering 
 `roslaunch ur5e_moveit_config demo.launch`. This will open the UR5e model in RViz.
