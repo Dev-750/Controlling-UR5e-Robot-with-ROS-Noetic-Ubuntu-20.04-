@@ -7,8 +7,10 @@ Follow the Installation Procedure on the ROS Wiki page [here](https://wiki.ros.o
 
 ## 2. Installing and Activating MoveIt Package
 
-To run MoveIt, you must first install Catkin and creat a Catkin workspace before you can Download MoveIt. After you download MoveIt, you will need to build the Catkin Workspace with `catkin build`. Most issues arrise in building the workspace so take your time and be methodical.
+To run MoveIt, you must first install Catkin and creat a Catkin workspace. After downloading MoveIt, you will need to build the Catkin Workspace with `catkin build`. DO NOT USE `catkin cmake` as this compiles differently from "catkin build". Most issues arrise in the building of the workspace, so take your time and be methodical.
+
 After you have installed the MoveIt package, you will need to configure the Plugin for RViz.
+
 Intructions can be found in the [MoveIt 1 - Noetic Documentation](https://moveit.github.io/moveit_tutorials/doc/getting_started/getting_started.html)
 
 ## 3. Download and Run UR5e Model
