@@ -23,11 +23,43 @@ We can now see a folder in `~/ws_moveit/src` labeled "universal_robot". From her
 **Command Syntax:** `roslaunch <package_name> <file_name.launch>`
 
 
-## 4. Installing Drivers onto UR5e Robot
+## 4. Installing URCap Driver onto UR5e Robot
+
+**Note**: For installing this URCap a minimal **PolyScope version of 5.1** is necessary.
+
+1. Save the **externalcontrol-x.x.x.urcap** which can be found [here](https://github.com/UniversalRobots/Universal_Robots_ExternalControl_URCap/releases) [^1] to a **USB stick**.
+
+[^1]: *For the URCap used in this project, check the resources folder of the repository.* 
+
+3. Plug in the USB to the **Control Box** and copy the file to the robots **program** folder.
+
+4. On the welcome screen click on the hamburger menu in the top-right corner and select **Settings** to enter the robot's setup. There select **System** and then **URCaps** to enter the URCaps installation screen.
+
+5. Click the little **plus** sign at the bottom to open the file selector. There you should see all urcap files stored inside the robot's programs folder or a plugged in USB drive. Select and open the **externalcontrol-x.x.x.urcap** file and click **open**. Your URCaps view should now show the **External Control** in the list of active URCaps and a notification to **restart** the robot. Do that now.
+   
+![External Control View](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/raw/master/ur_robot_driver/doc/initial_setup_images/es_05_urcaps_installed.png)
+ 
+5. After the reboot you should find the **External Control** URCap inside the **Installation** section. For this, select the **Installation tab** and select **External Control** from the list.
+    
+6. Here you'll have to setup the **IP address** of the external PC which will be running the ROS driver. Note that the robot and the external PC have to be in the **same network**, ideally in a direct connection with each other to minimize network disturbances. The custom port should be left untouched for now.
+
+![Installation section View](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/raw/master/ur_robot_driver/doc/initial_setup_images/es_07_installation_excontrol.png)
+
+7. Create a new program in the **Program** tab and insert the **External Control** program node into the program tree
+  
+![External Control Program img](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/raw/master/ur_robot_driver/doc/initial_setup_images/es_11_program_view_excontrol.png)
+
+8. If you click on the command tab again, you'll see the settings entered inside the Installation. Check that they are correct, then save the program. Your robot is now ready to be used together with this driver. [^2]
+
+[^2]: *For additional references, see the [install_urcap_e_series.md](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/blob/master/ur_robot_driver/doc/install_urcap_e_series.md)*
+      <br>*For tool communication setup, see the [Tool Communication Setup Guide](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/blob/master/ur_robot_driver/doc/setup_tool_communication.md)*
+
+## 5. PC Config
+
+### Extract Robot Calibration Info
 
 
-
-## 5. Robot Programming
+## 6. Robot Programming
 
 
 
