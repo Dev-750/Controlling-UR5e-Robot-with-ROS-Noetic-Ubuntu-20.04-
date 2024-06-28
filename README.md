@@ -56,6 +56,12 @@ We can now see a folder in `~/ws_moveit/src` labeled "universal_robot". From her
 
 ## 5. PC Config
 
+### Wired Robot Connection Settings
+
+In your PC's settings, navigate to **Network** and check your Wired settings. Make sure that under **IPv4** you set your Network and Address to the same one the robot is on.
+
+![Wired Network Settings]()
+
 ### Extract Robot Calibration Info
 
 
