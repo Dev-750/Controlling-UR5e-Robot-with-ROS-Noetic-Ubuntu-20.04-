@@ -76,7 +76,7 @@ $ roslaunch ur_calibration calibration_correction.launch \
 
 For the parameter `robot_ip` insert the IP address on which the ROS pc can reach the robot, and `target_filename` provides an absolute path where the result will be saved to. 
 
-Calibrations for all robots in your organization should be kept in a common package. 👇
+Calibrations for all robots in your organization should be kept in a common package. ⤵️
 
 ### Creating a calibration / launch package for all local robots
 
