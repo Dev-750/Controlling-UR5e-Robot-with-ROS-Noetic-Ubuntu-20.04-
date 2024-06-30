@@ -1,4 +1,4 @@
-# Controlling-UR5e-Robot-with-ROS-Noetic-Ubuntu-20.04-
+# Controlling-UR5e-Robot-with-ROS-Noetic-Ubuntu-20.04
 
 
 ## 1. Installing ROS Noetic
@@ -146,7 +146,7 @@ If the parameters in that file don't match the ones reported from the robot, the
 
 For more information on the launch file's parameters see its own documentation.
 
-Once the robot driver is started, load the previously generated program on the robot panel that will start the External Control program node and execute it. From that moment on the robot is fully functional. You can make use of the Pause function or even Stop :stop_button: the program. Simply press the Play button :arrow_forward: again and the ROS driver will reconnect.
+Once the robot driver is started, load the previously generated program on the robot panel that will start the External Control program node and execute it. From that moment on the robot is fully functional. You can make use of the Pause function or even Stop ( :stop_button: ) the program. Simply press the Play button ( :arrow_forward: ) again and the ROS driver will reconnect.
 
 ## 6. Robot Programming
 
