@@ -62,8 +62,91 @@ In your PC's settings, navigate to **Network** and check your Wired settings. Ma
 
 ![Wired Network Settings]()
 
-### Extract Robot Calibration Info
+### Extracting Robot Calibration Info
 
+Each UR robot is calibrated inside the factory giving exact forward and inverse kinematics. To make use of this in ROS, you first have to extract the **calibration information** from the robot.
+This node extracts calibration information directly from a robot, calculates the URDF correction and saves it into a .yaml file.
+
+In the launch folder of the ur_calibration package is a helper script:
+
+```
+$ roslaunch ur_calibration calibration_correction.launch \
+  robot_ip:=<robot_ip> target_filename:="${HOME}/my_robot_calibration.yaml"
+```
+
+For the parameter `robot_ip` insert the IP address on which the ROS pc can reach the robot, and `target_filename` provides an absolute path where the result will be saved to. 
+
+Calibrations for all robots in your organization should be kept in a common package. 👇
+
+### Creating a calibration / launch package for all local robots
+
+When dealing with multiple robots in one organization it might make sense to store calibration data into a package dedicated to that purpose only. To do so, create a new package (if it doesn't already exist)
+
+```
+# Replace your actual catkin_ws folder
+$ cd <catkin_ws>/src
+$ catkin_create_pkg example_organization_ur_launch ur_robot_driver \
+-D "Package containing calibrations and launch files for our UR robots."
+# Create a skeleton package
+$ mkdir -p example_organization_ur_launch/etc
+$ mkdir -p example_organization_ur_launch/launch
+```
+
+We can use the new package to store the calibration data in that package. We recommend naming each robot individually, e.g. ur5e-1, ur5e-2, etc.
+
+```
+$ roslaunch ur_calibration calibration_correction.launch \
+robot_ip:=<robot_ip> \
+target_filename:="$(rospack find example_organization_ur_launch)/etc/ex-ur10-1_calibration.yaml"
+```
+
+Create a launchfile for each particular robot. We base it upon the respective launchfile in the driver:
+
+```
+# Replace your actual catkin_ws folder
+$ cd <catkin_ws>/src/example_organization_ur_launch/launch
+$ roscp ur_robot_driver ur10_bringup.launch ex-ur10-1.launch
+```
+
+Next, modify the parameter section of the new launchfile to match your actual calibration:
+
+```
+<!-- Note: Only the relevant lines are printed here-->
+  <arg name="robot_ip" default="192.168.0.101"/> <!-- if there is a default IP scheme for your
+  robots -->
+  <arg name="kinematics_config" default="$(find example_organization_ur_launch)/etc/ex-ur10-1_calibration.yaml"/>
+```
+
+Then, anybody cloning this repository can startup the robot simply by launching
+
+```
+$ roslaunch example_organization_ur_launch ex-ur10-1.launch
+```
+
+## Starting the Driver
+
+Once the driver is built and the externalcontrol URCap is installed on the robot, you are good to go ahead starting the driver.
+
+To actually start the robot driver use one of the existing launch files
+
+```
+$ roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
+```
+\*Be sure to type "**ur5e**" inplace of `<robot_type>`.
+
+
+Next, pass that calibration to the launch file:
+
+```
+$ roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101 \
+  kinematics_config:=$(rospack find ur_calibration)/etc/ur10_example_calibration.yaml
+```
+
+If the parameters in that file don't match the ones reported from the robot, the driver will output an error during startup, but will remain usable.
+
+For more information on the launch file's parameters see its own documentation.
+
+Once the robot driver is started, load the previously generated program on the robot panel that will start the External Control program node and execute it. From that moment on the robot is fully functional. You can make use of the Pause function or even Stop :stop_button: the program. Simply press the Play button :arrow_forward: again and the ROS driver will reconnect.
 
 ## 6. Robot Programming
 
@@ -76,4 +159,5 @@ In your PC's settings, navigate to **Network** and check your Wired settings. Ma
 - [Universal Robots Package Install](https://wiki.ros.org/universal_robots)
 - [UR ROS Drivers](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver)
 - [UR Driver Setup Video](https://www.youtube.com/watch?time_continue=106&v=BS6pFmr7_lA&embeds_referring_euri=https%3A%2F%2Fwww.bing.com%2F&embeds_referring_origin=https%3A%2F%2Fwww.bing.com&source_ve_path=MjM4NTE&feature=emb_title)
+- [UR Calibration](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/blob/master/ur_calibration/README.md)
 - [The Construct: ROS Academy](https://www.theconstruct.ai/robotigniteacademy_learnros/ros-courses-library/)
